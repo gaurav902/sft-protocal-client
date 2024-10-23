@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import ErrorElement from "./components/ui/ErrorElement";
 import Home from "./pages/Home";
 import MainLayouts from "./components/Layouts/MainLayouts";
+import Task from "./pages/Task";
+import Withdraw from "./pages/Withdraw";
 
 const MainRoutes = createBrowserRouter([
     {
@@ -13,6 +15,14 @@ const MainRoutes = createBrowserRouter([
             {
                 index: true,
                 element: <Home/>
+            },
+            {
+                path: 'task',
+                element: <Task/>
+            },
+            {
+                path: 'withdraw',
+                element: <Withdraw/>
             }
         ]
     }
