@@ -1,7 +1,9 @@
+
 import BaseQuery from "./BaseQuery";
 
 const InjectEndpoint = BaseQuery.injectEndpoints({
   endpoints: (builder) => ({
+
     CreateAccount: builder.mutation({
       query: (arg) => ({
         url: '/create-account',
@@ -10,6 +12,16 @@ const InjectEndpoint = BaseQuery.injectEndpoints({
       }),
       invalidatesTags: ["user"]
     }),
+
+    MarkAsComplete: builder.mutation({
+      query: (arg) => ({
+        url: '/complete-task',
+        method: 'POST',
+        body: arg,
+      }),
+      invalidatesTags: ["task"]
+    }),
+
     FindAccount: builder.query({
       query: (arg) => ({
         url: `/find-account?userId=${arg}`, // Append userId directly to the URL
@@ -17,6 +29,19 @@ const InjectEndpoint = BaseQuery.injectEndpoints({
       }),
       providesTags: ["user"]
    }),
+
+   TaskList: builder.query({
+    query: (arg) => ({
+      url: '/task-list', // Append userId directly to the URL
+      method: 'GET',
+      params: {
+        userId: arg
+      }
+    }),
+   // providesTags: ["task"]
+ }),
+
+   
 
     UpdateAccount: builder.mutation({
       query: (arg) => ({
@@ -32,8 +57,9 @@ const InjectEndpoint = BaseQuery.injectEndpoints({
         url: '/leaderboard',
         method: 'GET'
       }),
+      providesTags: ["task"]
    }),
   }),
 });
 
-export const { useCreateAccountMutation, useFindAccountQuery, useUpdateAccountMutation, useLeaderboardQuery } = InjectEndpoint;
+export const { useCreateAccountMutation, useMarkAsCompleteMutation, useFindAccountQuery, useUpdateAccountMutation, useLeaderboardQuery, useTaskListQuery } = InjectEndpoint;
